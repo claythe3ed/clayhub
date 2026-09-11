@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ClayHub — Inspect · Engineer · Dominant</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0A0A0A;color:#F5F0EB;overflow-x:hidden}
+#scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#8B7BF7,#00D4AA);z-index:999;width:0%;transition:width .05s linear}
+.scene{height:100vh;width:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;background-color:#0A0A0A;background-size:cover;background-position:center;position:relative;overflow:hidden}
+.scene video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%);object-fit:cover;z-index:0}
+.scene::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at center,rgba(10,10,10,.3) 0%,rgba(10,10,10,.8) 100%);z-index:1;pointer-events:none}
+#three-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:1;pointer-events:none}
+#three-canvas canvas{display:block;width:100%!important;height:100%!important}
+.scene-content{position:relative;z-index:2;text-align:center;padding:2rem 3rem;max-width:800px;background:rgba(10,10,10,.5);backdrop-filter:blur(4px);border-radius:20px;border:1px solid rgba(255,255,255,.05);box-shadow:0 0 60px rgba(0,0,0,.6);opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease;pointer-events:none;text-shadow:0 0 30px rgba(0,0,0,.9);color:#F5F0EB}
+.scene.active .scene-content{opacity:1;transform:translateY(0)}
+.scene-content h1{font-family:'Cinzel',Georgia,serif;font-weight:700;font-size:clamp(2.8rem,10vw,6rem);letter-spacing:.02em;text-transform:uppercase;text-shadow:0 0 40px rgba(0,0,0,.9),0 0 80px rgba(0,0,0,.6);margin-bottom:.5rem}
+.scene-content h1 .accent{color:#8B7BF7}
+.scene-content h1 .mint{color:#00D4AA}
+.scene-content p{font-size:clamp(1.1rem,2.5vw,1.6rem);opacity:.95;text-shadow:0 0 30px rgba(0,0,0,.9);line-height:1.5;margin-top:.5rem}
+.scene-content .sub{font-family:'JetBrains Mono','Courier New',monospace;font-size:clamp(.8rem,1.2vw,1rem);color:#8B7BF7;letter-spacing:.1em;margin-top:.8rem;opacity:.9;text-shadow:0 0 20px rgba(0,0,0,.8)}
+.scene-content .cta{display:inline-block;margin-top:2rem;padding:1rem 2.8rem;border:2px solid #8B7BF7;border-radius:60px;font-weight:600;font-size:1.1rem;color:#F5F0EB;text-decoration:none;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);transition:all .3s ease;pointer-events:auto;box-shadow:0 0 30px rgba(0,0,0,.5)}
+.scene-content .cta:hover{background:#8B7BF7;color:#0A0A0A;box-shadow:0 0 40px rgba(139,123,247,.5)}
+#scene6 .scene-content{background:transparent;backdrop-filter:none;border:none;box-shadow:none;text-shadow:0 4px 30px rgba(0,0,0,.95),0 0 60px rgba(0,0,0,.85),0 0 100px rgba(0,0,0,.6)}
+@media(max-width:640px){.scene-content h1{font-size:clamp(2rem,12vw,3.5rem)}.scene-content p{font-size:1rem}.scene-content .cta{padding:.8rem 2rem;font-size:.9rem}.scene-content{padding:1.5rem}}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="scroll-progress"></div>
+<div id="three-canvas"></div>
+<div id="scenes-container">
+
+<section class="scene" id="scene1">
+<video autoplay muted loop playsinline preload="metadata" poster="assets/images/scene1.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene1.mp4" type="video/mp4"></video>
+<div class="scene-content">
+<h1>ClayHub</h1>
+<p>A closed-loop pipeline: find the gap before the market knows it exists — then build the thing that fills it.</p>
+<div class="sub">scroll to begin &rarr;</div>
+</div>
+</section>
+
+<section class="scene" id="scene2">
+<video autoplay muted loop playsinline preload="metadata" poster="assets/images/scene2.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene2.mp4" type="video/mp4"></video>
+<div class="scene-content">
+<h1>Inspect</h1>
+<p>Full-spectrum market analysis. Behavioral mapping. Cultural pattern recognition. Competitive gap detection.<br />We don't guess what people need — we detect it.</p>
+<div class="sub">the gap is always there first</div>
+</div>
+</section>
+
+<section class="scene" id="scene3">
+<video autoplay muted loop playsinline preload="metadata" poster="assets/images/scene3.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene3.mp4" type="video/mp4"></video>
+<div class="scene-content">
+<h1>Engineer</h1>
+<p>Software. Hardware. Systems. Strategy.<br />The gap dictates the tool — not the other way around.</p>
+<div class="sub">form follows the finding</div>
+</div>
+</section>
+
+<section class="scene" id="scene4">
+<video autoplay muted loop playsinline preload="metadata" poster="assets/images/scene4.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene4.mp4" type="video/mp4"></video>
+<div class="scene-content">
+<h1>Dominant</h1>
+<p>By the time it's visible to everyone, the work is already done.<br />Being early isn't a strategy — it's the result of moving with clarity.</p>
+<div class="sub">timing is everything</div>
+</div>
+</section>
+
+<section class="scene" id="scene5">
+<video autoplay muted loop playsinline preload="metadata" poster="assets/images/scene5.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene5.mp4" type="video/mp4"></video>
+<div class="scene-content">
+<h1>Deployment</h1>
+<p>Multiple live systems across sectors — each built from the same doctrine.<br />Inspect deep. Engineer precisely. Move first.</p>
+<div class="sub">outcomes over portfolios</div>
+</div>
+</section>
+
+<section class="scene" id="scene6" style="background-image:url('assets/images/scene6.jpg')">
+<div class="scene-content">
+<h1>The Gap Is <span class="mint">Waiting</span></h1>
+<p>If you want to move with clarity — before it becomes obvious — we talk.</p>
+<a href="#" class="cta" id="contact-cta">—</a>
+<div class="sub">ClayHub &mdash; Direct line</div>
+</div>
+</section>
+
+</div>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const container=document.getElementById('three-canvas');
+const scene3D=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,.1,100);
+camera.position.z=15;
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.setClearColor(0x000000,0);
+container.appendChild(renderer.domElement);
+const count=2000;
+const geo=new THREE.BufferGeometry();
+const pos=new Float32Array(count*3);
+const colors=new Float32Array(count*3);
+const sizes=new Float32Array(count);
+const col1=new THREE.Color(0x8B7BF7);
+const col2=new THREE.Color(0x00D4AA);
+for(let i=0;i<count;i++){
+const r=5+Math.random()*20;
+const theta=Math.random()*Math.PI*2;
+const phi=Math.acos(2*Math.random()-1);
+pos[i*3]=r*Math.sin(phi)*Math.cos(theta);
+pos[i*3+1]=r*Math.sin(phi)*Math.sin(theta)*.6;
+pos[i*3+2]=r*Math.cos(phi)-15;
+const c=new THREE.Color().lerpColors(col1,col2,Math.random());
+colors[i*3]=c.r;colors[i*3+1]=c.g;colors[i*3+2]=c.b;
+sizes[i]=.05+Math.random()*.2;
+}
+geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+geo.setAttribute('color',new THREE.BufferAttribute(colors,3));
+geo.setAttribute('size',new THREE.BufferAttribute(sizes,1));
+const cv=document.createElement('canvas');
+cv.width=64;cv.height=64;
+const ctx=cv.getContext('2d');
+const grad=ctx.createRadialGradient(32,32,0,32,32,32);
+grad.addColorStop(0,'rgba(255,255,255,1)');
+grad.addColorStop(.4,'rgba(255,255,255,.8)');
+grad.addColorStop(1,'rgba(255,255,255,0)');
+ctx.fillStyle=grad;
+ctx.fillRect(0,0,64,64);
+const texture=new THREE.CanvasTexture(cv);
+const mat=new THREE.PointsMaterial({size:.2,map:texture,blending:THREE.AdditiveBlending,depthWrite:false,vertexColors:true,transparent:true,opacity:.6});
+const particles=new THREE.Points(geo,mat);
+scene3D.add(particles);
+const videos=document.querySelectorAll('.scene video');
+const videoObserver=new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{
+const v=entry.target;
+if(entry.isIntersecting){
+    v.muted=true;
+    const p=v.play();
+    if(p&&p.catch){
+        p.catch(err=>{
+            console.warn('Autoplay blocked for',v.currentSrc,err);
+            const retry=()=>{v.play().catch(()=>{});document.removeEventListener('touchstart',retry);document.removeEventListener('click',retry);};
+            document.addEventListener('touchstart',retry,{once:true});
+            document.addEventListener('click',retry,{once:true});
+        });
+    }
+}else{
+    try{v.pause();}catch(e){}
+}
+});
+},{threshold:0.1,rootMargin:'100px'});
+videos.forEach(v=>{v.muted=true;videoObserver.observe(v);});
+// Force first video to play on load
+setTimeout(()=>{const first=document.querySelector('#scene1 video');if(first){first.muted=true;first.play().catch(()=>{});}},200);
+const contents=document.querySelectorAll('.scene-content');
+const tl=gsap.timeline({
+scrollTrigger:{trigger:"body",start:"top top",end:"bottom bottom",scrub:1.2,invalidateOnRefresh:true,
+onUpdate:(self)=>{document.getElementById('scroll-progress').style.width=(self.progress*100)+'%';}},
+defaults:{duration:1,ease:"power1.inOut"}
+});
+const totalScenes=contents.length;
+const seg=1/totalScenes;
+contents.forEach((el,i)=>{
+const start=i*seg;const end=(i+1)*seg;
+const fadeInEnd=start+.15*seg;
+const fadeOutStart=end-.15*seg;
+tl.to(el,{opacity:1,y:0,duration:.3,ease:"power2.out"},start)
+.to(el,{opacity:1,y:0,duration:.1,ease:"none"},fadeInEnd);
+if(i<contents.length-1){
+tl.to(el,{opacity:0,y:-20,duration:.3,ease:"power2.in"},fadeOutStart);
+}
+});
+const mouse={x:0,y:0};
+let targetX=0,targetY=0;
+document.addEventListener('mousemove',(e)=>{
+mouse.x=(e.clientX/window.innerWidth-.5)*2;
+mouse.y=-(e.clientY/window.innerHeight-.5)*2;
+});
+window.addEventListener('resize',()=>{
+const w=window.innerWidth,h=window.innerHeight;
+renderer.setSize(w,h);
+camera.aspect=w/h;
+camera.updateProjectionMatrix();
+});
+function animate(){
+requestAnimationFrame(animate);
+targetX+=(mouse.x*.6-targetX)*.05;
+targetY+=(mouse.y*.4-targetY)*.05;
+particles.rotation.y+=.0005+targetX*.002;
+particles.rotation.x=Math.sin(Date.now()*.0003)*.02+targetY*.005;
+mat.size=.2+Math.sin(Date.now()*.001)*.02;
+renderer.render(scene3D,camera);
+}
+animate();
+window.addEventListener('load',()=>ScrollTrigger.refresh());
+console.log('Cinematic site ready');
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const u='lattix1',d='outlook.com',a=u+'@'+d;
+  const el=document.getElementById('contact-cta');
+  if(el){el.href='mailto:'+a;el.textContent=a;}
+});
+</script>
+</body>
+</html>
