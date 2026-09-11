@@ -38,7 +38,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans
 <div id="scenes-container">
 
 <section class="scene" id="scene1">
-<video autoplay muted loop playsinline preload="metadata" poster="assets/images/scene1.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene1.mp4" type="video/mp4"></video>
+<video autoplay muted loop playsinline preload="metadata" webkit-playsinline poster="assets/images/scene1.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene1.mp4" type="video/mp4"></video>
 <div class="scene-content">
 <h1>ClayHub</h1>
 <p>A closed-loop pipeline: find the gap before the market knows it exists — then build the thing that fills it.</p>
@@ -47,7 +47,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans
 </section>
 
 <section class="scene" id="scene2">
-<video autoplay muted loop playsinline preload="metadata" poster="assets/images/scene2.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene2.mp4" type="video/mp4"></video>
+<video autoplay muted loop playsinline preload="metadata" webkit-playsinline poster="assets/images/scene2.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene2.mp4" type="video/mp4"></video>
 <div class="scene-content">
 <h1>Inspect</h1>
 <p>Full-spectrum market analysis. Behavioral mapping. Cultural pattern recognition. Competitive gap detection.<br />We don't guess what people need — we detect it.</p>
@@ -56,7 +56,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans
 </section>
 
 <section class="scene" id="scene3">
-<video autoplay muted loop playsinline preload="metadata" poster="assets/images/scene3.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene3.mp4" type="video/mp4"></video>
+<video autoplay muted loop playsinline preload="metadata" webkit-playsinline poster="assets/images/scene3.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene3.mp4" type="video/mp4"></video>
 <div class="scene-content">
 <h1>Engineer</h1>
 <p>Software. Hardware. Systems. Strategy.<br />The gap dictates the tool — not the other way around.</p>
@@ -65,7 +65,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans
 </section>
 
 <section class="scene" id="scene4">
-<video autoplay muted loop playsinline preload="metadata" poster="assets/images/scene4.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene4.mp4" type="video/mp4"></video>
+<video autoplay muted loop playsinline preload="metadata" webkit-playsinline poster="assets/images/scene4.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene4.mp4" type="video/mp4"></video>
 <div class="scene-content">
 <h1>Dominant</h1>
 <p>By the time it's visible to everyone, the work is already done.<br />Being early isn't a strategy — it's the result of moving with clarity.</p>
@@ -74,7 +74,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans
 </section>
 
 <section class="scene" id="scene5">
-<video autoplay muted loop playsinline preload="metadata" poster="assets/images/scene5.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene5.mp4" type="video/mp4"></video>
+<video autoplay muted loop playsinline preload="metadata" webkit-playsinline poster="assets/images/scene5.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene5.mp4" type="video/mp4"></video>
 <div class="scene-content">
 <h1>Deployment</h1>
 <p>Multiple live systems across sectors — each built from the same doctrine.<br />Inspect deep. Engineer precisely. Move first.</p>
@@ -208,6 +208,20 @@ document.addEventListener('DOMContentLoaded',()=>{
   const el=document.getElementById('contact-cta');
   if(el){el.href='mailto:'+a;el.textContent=a;}
 });
+
+// Unlock videos on first user interaction (required by mobile browsers)
+let unlocked = false;
+const unlockVideos = () => {
+  if (unlocked) return;
+  unlocked = true;
+  document.querySelectorAll('.scene video').forEach(v => {
+    v.muted = true;
+    v.play().catch(() => {});
+  });
+};
+document.addEventListener('touchstart', unlockVideos, { once: true, passive: true });
+document.addEventListener('scroll', unlockVideos, { once: true, passive: true });
+document.addEventListener('click', unlockVideos, { once: true });
 </script>
 </body>
 </html>
