@@ -57,6 +57,26 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans
 .method-strip{display:flex;justify-content:center;gap:.55rem;flex-wrap:wrap;margin-top:1.35rem}
 .method-strip span{font-family:'JetBrains Mono','Courier New',monospace;font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;padding:.45rem .65rem;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:rgba(245,240,235,.72)}
 @media(max-width:640px){.site-nav{top:14px;left:14px;right:14px}.site-nav .brand{font-size:.62rem}.site-nav .links a{font-size:.58rem;padding:.45rem .55rem}.evidence-dock{right:14px;bottom:14px;width:calc(100vw - 28px)}}
+
+/* Case files */
+.case-file-section{min-height:100vh;padding:10vh 6vw;display:flex;align-items:center;justify-content:center;position:relative;background:#0A0A0A;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+.case-file-inner{width:min(1180px,100%);position:relative;z-index:2}
+.case-file-kicker{font-family:'JetBrains Mono','Courier New',monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:#00D4AA;margin-bottom:.8rem}
+.case-file-heading{display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:2rem}
+.case-file-heading h2{font-family:'Cinzel',Georgia,serif;font-size:clamp(2rem,5vw,4rem);font-weight:700;text-transform:uppercase}
+.case-file-heading p{max-width:430px;color:rgba(245,240,235,.62);line-height:1.6}
+.case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.case-card{display:flex;min-height:330px;flex-direction:column;justify-content:space-between;padding:1.7rem;border:1px solid rgba(255,255,255,.13);border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.015));text-decoration:none;color:#F5F0EB;transition:transform .35s,border-color .35s,background .35s;position:relative;overflow:hidden}
+.case-card::after{content:'';position:absolute;inset:auto -20% -50% 20%;height:180px;background:radial-gradient(circle,rgba(139,123,247,.18),transparent 65%);pointer-events:none}
+.case-card:hover{transform:translateY(-6px);border-color:rgba(139,123,247,.7);background:linear-gradient(145deg,rgba(139,123,247,.10),rgba(255,255,255,.025))}
+.case-card .number{font-family:'JetBrains Mono','Courier New',monospace;color:#8B7BF7;font-size:.68rem;letter-spacing:.14em}
+.case-card h3{font-family:'Cinzel',Georgia,serif;font-size:clamp(1.5rem,3vw,2.3rem);margin:.8rem 0 .45rem}
+.case-card .type{font-family:'JetBrains Mono','Courier New',monospace;font-size:.62rem;letter-spacing:.12em;color:#00D4AA;text-transform:uppercase}
+.case-card p{color:rgba(245,240,235,.68);line-height:1.55;max-width:520px;margin-top:1rem}
+.case-card .open{font-family:'JetBrains Mono','Courier New',monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;margin-top:1.6rem;color:rgba(245,240,235,.82)}
+.case-card.private{border-color:rgba(0,212,170,.22)}
+.case-card.private .number{color:#00D4AA}
+@media(max-width:760px){.case-file-heading{display:block}.case-file-heading p{margin-top:1rem}.case-grid{grid-template-columns:1fr}.case-card{min-height:290px}}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,7 +99,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans
   <div class="brand">CLAYHUB / TECHNICAL INTELLIGENCE &amp; SYSTEMS</div>
   <div class="links">
     <a href="https://github.com/claythe3ed" target="_blank" rel="noopener">GitHub</a>
-    <a href="#scene5">Systems</a>
+    <a href="#case-files-1">Case Files</a>
     <a href="#scene6">Contact</a>
   </div>
 </nav>
@@ -88,7 +108,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans
   <div class="system"><a href="https://github.com/claythe3ed/uxo-detection-drone" target="_blank" rel="noopener">UXO Detection Drone</a><span>FIELD SYSTEM</span><small>Multi-sensor humanitarian detection: magnetics, thermal, vibrometry, GPR and hyperspectral fusion.</small></div>
   <div class="system"><a href="https://github.com/claythe3ed/sasmcc-physics-engine" target="_blank" rel="noopener">S-ASM-CC Physics Engine</a><span>COMPUTATIONAL</span><small>First-principles acoustic/biophysical modeling with literature-grounded assumptions and explicit research status.</small></div>
   <div class="system"><a href="https://github.com/claythe3ed/solar-absorption-fridge" target="_blank" rel="noopener">Solar Absorption Fridge</a><span>RESEARCH / HOLD</span><small>NH₃–H₂O solar refrigeration research with validation, CFD and CAD work; fabrication is explicitly gated.</small></div>
-  <div class="system"><a href="https://github.com/claythe3ed/lattix-website" target="_blank" rel="noopener">LATTIX Intelligence</a><span>FIELD INTELLIGENCE</span><small>Groundwater and strategic intelligence systems designed for Sudan and resource-constrained environments.</small></div>
+  <div class="system"><a href="case-files/pharmenix.html">Pharmenix</a><span>PRIVATE ERP</span><small>Private pharmacy ERP system; public case-study detail is intentionally limited.</small></div>
 </aside>
 <div id="scroll-progress"></div>
 <div id="three-canvas"></div>
@@ -112,6 +132,28 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans
 </div>
 </section>
 
+
+<section class="case-file-section" id="case-files-1">
+  <div class="case-file-inner">
+    <div class="case-file-kicker">Case Files / 01—02</div>
+    <div class="case-file-heading">
+      <h2>Evidence, not portfolio.</h2>
+      <p>Selected systems shown as technical dossiers: the problem, the investigation, the model, the engineering and the evidence layer.</p>
+    </div>
+    <div class="case-grid">
+      <a class="case-card" href="case-files/uxo-detection-drone.html">
+        <div><div class="number">CASE FILE 01</div><h3>UXO Detection Drone</h3><div class="type">Humanitarian sensing · field system</div><p>Low-cost UAV multi-sensor detection research combining magnetics, thermal, vibrometry, GPR and hyperspectral sensing.</p></div>
+        <div class="open">Open case file →</div>
+      </a>
+      <a class="case-card" href="case-files/sasmcc-physics-engine.html">
+        <div><div class="number">CASE FILE 02</div><h3>S-ASM-CC Physics Engine</h3><div class="type">Computational research · biophysics</div><p>A six-layer first-principles computational model built around acoustic fields, bubble dynamics, sonolysis, emission and multi-bubble behavior.</p></div>
+        <div class="open">Open case file →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+
 <section class="scene" id="scene3">
 <video autoplay muted loop playsinline preload="metadata" webkit-playsinline poster="assets/images/scene3.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene3.mp4" type="video/mp4"></video>
 <div class="scene-content">
@@ -130,6 +172,28 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans
 <div class="sub">confidence is earned, not declared</div>
 </div>
 </section>
+
+
+<section class="case-file-section" id="case-files-2">
+  <div class="case-file-inner">
+    <div class="case-file-kicker">Case Files / 03—04</div>
+    <div class="case-file-heading">
+      <h2>Different domains. Same loop.</h2>
+      <p>Engineering research and private software belong in the same evidence architecture when the method is the common denominator.</p>
+    </div>
+    <div class="case-grid">
+      <a class="case-card" href="case-files/solar-absorption-fridge.html">
+        <div><div class="number">CASE FILE 03</div><h3>Solar Absorption Fridge</h3><div class="type">Solar thermal engineering · research / hold</div><p>NH₃–H₂O solar refrigeration research for off-grid use, with thermodynamic modeling, validation work, CFD and CAD.</p></div>
+        <div class="open">Open case file →</div>
+      </a>
+      <a class="case-card private" href="case-files/pharmenix.html">
+        <div><div class="number">CASE FILE 04</div><h3>Pharmenix</h3><div class="type">Pharmacy ERP system · private</div><p>A private pharmacy ERP system. Public-facing detail is intentionally limited; the case file documents the system category without exposing private implementation.</p></div>
+        <div class="open">Open private case file →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
 
 <section class="scene" id="scene5">
 <video autoplay muted loop playsinline preload="metadata" webkit-playsinline poster="assets/images/scene5.jpg" disablepictureinpicture disableremoteplayback><source src="assets/videos/scene5.mp4" type="video/mp4"></video>
