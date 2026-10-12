@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Heptagon — ClayHub Case File</title>
+<meta name="description" content="Heptagon: an open-source Python framework for cybersecurity incident-response plan checks, structured incident records, signature verification and audit workflows.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{background:#0A0A0A;color:#F5F0EB;font-family:Inter,system-ui,sans-serif;line-height:1.6}a{color:inherit}.wrap{width:min(1100px,calc(100% - 40px));margin:auto}.top{min-height:52vh;display:flex;align-items:end;padding:120px 0 70px;border-bottom:1px solid rgba(255,255,255,.1);background:radial-gradient(circle at 75% 20%,rgba(139,123,247,.15),transparent 35%)}.kicker,.label{font:500 .68rem/1.2 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:#00D4AA}.top h1{font:700 clamp(3rem,8vw,7rem)/.95 Cinzel,Georgia,serif;text-transform:uppercase;margin:18px 0}.lede{font-size:clamp(1.05rem,2vw,1.35rem);max-width:760px;color:rgba(245,240,235,.75)}.meta{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:25px}.pill{font:500 .65rem/1 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;padding:.6rem .75rem;border:1px solid rgba(255,255,255,.14);border-radius:999px;color:rgba(245,240,235,.7)}main{padding:70px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:28px 0 60px}.block{padding:25px;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:rgba(255,255,255,.025)}.block h2{font:700 1.15rem Cinzel,Georgia,serif;text-transform:uppercase;margin-bottom:12px}.block p,.block li{color:rgba(245,240,235,.7)}ul{padding-left:20px}.wide{margin:28px 0 60px}.evidence{display:flex;flex-wrap:wrap;gap:10px}.evidence a,.back{display:inline-block;padding:.75rem 1rem;border:1px solid rgba(139,123,247,.5);border-radius:999px;text-decoration:none;font:500 .68rem 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em}.evidence a:hover,.back:hover{background:rgba(139,123,247,.12)}.note{border-left:2px solid #00D4AA;padding:18px 20px;background:rgba(0,212,170,.045);color:rgba(245,240,235,.72)}footer{padding:40px 0 70px;border-top:1px solid rgba(255,255,255,.08);color:rgba(245,240,235,.45);font-size:.85rem}@media(max-width:720px){.grid{grid-template-columns:1fr}.top{min-height:60vh;padding-top:100px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<div class="kicker">Case File 05 / Open-Source Software</div>
+<h1>Heptagon</h1>
+<p class="lede">A Python framework for making incident-response plans and records more inspectable: validate plan structure, check escalation paths, record evidence and decisions, and audit signed records for specific integrity failures.</p>
+<div class="meta"><span class="pill">Cybersecurity / IR</span><span class="pill">Python 3.11+</span><span class="pill">MIT license</span><span class="pill">Public repository</span></div>
+</div></header>
+<main><div class="wrap">
+<div class="grid">
+<section class="block"><div class="label">Problem</div><h2>Make gaps explicit</h2><p>Incident-response plans and logs can be difficult to inspect consistently. Heptagon represents a response plan as structured data and returns named failures for missing roles, unreachable escalation paths, incomplete records, invalid signatures and unresolved evidence references.</p></section>
+<section class="block"><div class="label">Workflow</div><h2>Declare → verify → simulate → audit</h2><ul><li><strong>declare:</strong> validate a YAML plan against a JSON Schema and summarize it.</li><li><strong>verify:</strong> run six plan and record-completeness gates.</li><li><strong>simulate:</strong> check whether scenario escalation paths are reachable.</li><li><strong>audit:</strong> inspect JSONL evidence/decision records, signatures, required coordinates and evidence references.</li></ul></section>
+</div>
+<section class="wide block"><div class="label">Record model</div><h2>Seven coordinates</h2><p>Heptagon groups a record's spacetime metadata with three additional fields: intention (F5), effect (F6) and lineage (F7). The six gates check team completeness, reporting-chain reachability, evidence integrity, signed/reconciled records, emergency override logging, and seven-coordinate completeness. This is a software-defined record schema—not proof that an incident account is complete in the real world.</p></section>
+<section class="wide block"><div class="label">Implementation</div><h2>Python library and CLI</h2><p>The repository contains a Python package, a command-line interface, YAML/JSON Schema plan loading, JSONL incident-log serialization, Ed25519 signing via PyNaCl, a symbolic modeling layer, a deterministic scenario simulator, examples and tests. The package is published on PyPI as <code>heptagon7</code>; the import and CLI names are <code>heptagon</code>.</p></section>
+<section class="wide block"><div class="label">Verification record</div><h2>Tests and packaging checks</h2><p>The repository documents 109 tests and a GitHub Actions workflow configured to test Python 3.11 and 3.12, build a wheel, check that the JSON Schema is included, install the wheel into a fresh environment, and run CLI smoke tests. These repository definitions describe the intended checks; consult the live workflow for the latest run result before treating a release as verified.</p></section>
+<section class="wide"><div class="note"><strong>Scope and limits:</strong> Heptagon is not a SIEM, EDR, real-time detection system, threat-intelligence feed, legal-admissibility guarantee or certification of organizational compliance. Its threat model excludes compromised signing keys, malicious deletion by someone with write access to the log, and attackers who control the audit machine. Private signing keys are written with restrictive file permissions but are not encrypted at rest. The code also retains a legacy non-cryptographic signature mode when a decision is created without an Ed25519 signer; callers should explicitly provide a signer when cryptographic verification is required.</div></section>
+<section class="wide"><div class="label">Evidence / primary sources</div><div class="evidence">
+<a href="https://github.com/claythe3ed/heptagon" target="_blank" rel="noopener">Source repository →</a>
+<a href="https://claythe3ed.github.io/heptagon/" target="_blank" rel="noopener">Documentation site →</a>
+<a href="https://pypi.org/project/heptagon7/" target="_blank" rel="noopener">PyPI package →</a>
+<a href="https://github.com/claythe3ed/heptagon/actions/workflows/ci.yml" target="_blank" rel="noopener">CI workflow →</a>
+</div></section>
+</div></main>
+<footer><div class="wrap"><a class="back" href="../index.html">← Back to ClayHub</a><p style="margin-top:20px">ClayHub — Inspect deeply. Model rigorously. Engineer precisely. Validate honestly. Deploy where it matters.</p></div></footer>
+</body></html>
