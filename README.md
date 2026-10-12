@@ -25,6 +25,7 @@ This repository contains the public-facing ClayHub site: a cinematic front door 
 | [UXO Detection Drone](https://github.com/claythe3ed/uxo-detection-drone) | Humanitarian field sensing | Multi-sensor simulation and fusion work |
 | [S-ASM-CC Physics Engine](https://github.com/claythe3ed/sasmcc-physics-engine) | Computational biophysics | Literature-grounded first-principles model |
 | [Solar Absorption Fridge](https://github.com/claythe3ed/solar-absorption-fridge) | Solar thermal / refrigeration | Thermodynamic model, CFD, CAD and validation work |
+| [Heptagon](https://github.com/claythe3ed/heptagon) | Cybersecurity / incident response | Structured CIRP checks, escalation simulation, signed records and audit tooling |
 | [LATTIX Intelligence](https://github.com/claythe3ed/lattix-website) | Groundwater / strategic intelligence | Field-oriented intelligence platform |
 
 These projects are not presented as interchangeable commercial products. Each has its own maturity, assumptions, limitations, and validation requirements. The repositories are the deeper evidence layer.
